@@ -1,0 +1,49 @@
+USe DFU from Atmel studio or FLIP to program the MCU
+
+.\Jiminy_usb2serial\Jiminy_usb2serial\Debug\Jiminy_usb2serial.hex
+
+flash USB 2 UART Bridge to atmega16u2
+
+unplug replug device or reset it.
+
+If lockbits are as follows then the device can be flashced with AS7 DFU or FLIP
+
+LB = PROG_VER_DISABLED
+BLB0 = NO_LOCK
+BLB1 = SPM_DISABLE
+
+LOCKBIT = 0xEC (valid)
+
+If they are set as follows it is not possible, the chip has to be reset and then flashed with ISP.
+The DFU is then lost. this seems to be an production error.
+
+LB = PROG_VER_DISABLED
+BLB0 = LPM_SPM_DISABLE
+BLB1 = LPM_SPM_DISABLE
+
+LOCKBIT = 0xC0 (valid)
+
+When usb2serial bridge is flashed set fuses and lockbits as follows
+
+BODLEVEL = 3V0
+HWBE = [X]
+DWEN = [ ]
+RSTDISBL = [ ]
+SPIEN = [X]
+WDTON = [ ]
+EESAVE = [ ]
+BOOTSZ = 2048W_1800
+BOOTRST = [ ]
+CKDIV8 = [ ]
+CKOUT = [ ]
+SUT_CKSEL = EXTXOSC_8MHZ_XX_258CK_65MS
+
+EXTENDED = 0xF4 (valid)
+HIGH = 0xD9 (valid)
+LOW = 0xDE (valid)
+
+LB = PROG_VER_DISABLED
+BLB0 = LPM_SPM_DISABLE
+BLB1 = LPM_SPM_DISABLE
+
+LOCKBIT = 0xC0 (valid)
